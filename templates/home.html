@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>DashBoard</h1>
+<div class="line"></div>
+<section class="base" id="base">
+    <div class="text">
+        <h2>Welcome <span>{{ username }}</span>!</h2>
+    </div>
+    <div class="image">
+        <img src="../static/images/face.png" alt="face" style="width: 100px">
+    </div>    
+</section>
+{% if role == 'User' %}
+<section class="display">
+    <div class="box">
+        <h3>Last Sign In</h3>
+        <p>{{signintime}}</p>
+    </div>
+    <div class="box">
+        <h3>Last Sign Out</h3>
+        <p>{{signouttime}}</p>
+    </div>
+</section>
+{% endif %}
+{% endblock %}

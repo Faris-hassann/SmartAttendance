@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+{% block content %}
+<link rel="stylesheet" href="../static/css/bootstrap.min.css">
+<link rel="stylesheet" href="../static/css/datatables.min.css">
+<link href="https://cdn.datatables.net/v/dt/dt-1.13.5/datatables.min.css" rel="stylesheet">
+<link href="../static/js/datatable.js" rel="stylesheet">
+<style>
+    .sidebar{
+        height: 160vh;
+    }
+    input[type="search"] {
+        background-color: #898ea1;
+        border: 1px solid white;
+        border-radius: 5px;
+    }
+    label{
+        font-size: 15px;
+        margin: 5px;
+    }
+    input[type="search"]:valid{
+        color: var(--blue);
+    }
+    input:is(:focus, :valid){
+        box-shadow: 0 3px 6px var(--blue);
+    }
+</style>
+<!-- report table -->
+<div class="search">
+    <h1>Employee Data</h1>
+</div>
+
+<table id="employee-table" class="display">
+    <thead>
+        <tr>
+            <th>History ID</th>
+            <th>Employee ID</th>
+            <th style="display: flex;">Sign in Time</th>
+            <th>Sign out Time</th>
+            <th style="display: flex;">Created on</th>
+        </tr>
+    </thead>
+</table>
+<script src="http://code.jquery.com/jquery-1.9.0rc1.js"></script>
+<script src="../static/js/bootstrap.min.js"></script>
+<script src="https://cdn.datatables.net/v/dt/dt-1.13.5/datatables.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $('#employee-table').DataTable({
+            ajax: {
+                url: "{{ url_for('get_employees_data_year_route') }}",
+                dataSrc: 'data',
+                error: function(xhr, textStatus, errorThrown) {
+                    console.log("Ajax error:", errorThrown);
+                }
+            },
+            columns: [
+            { data: 'HistoryID' },
+            { data: 'EmployeeID' },
+            { data: 'signInTime' },
+            { data: 'signOutTime' },
+            { data: 'createdOn' }]
+            });
+    });
+</script>
+{% endblock %}

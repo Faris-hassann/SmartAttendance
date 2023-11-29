@@ -1,0 +1,103 @@
+{% extends 'base.html' %}
+{% block content %}
+<link rel="stylesheet" href="../static/css/bootstrap.min.css">
+<link rel="stylesheet" href="../static/css/datatables.min.css">
+<link href="https://cdn.datatables.net/v/dt/dt-1.13.5/datatables.min.css" rel="stylesheet">
+<link href="../static/js/datatable.js" rel="stylesheet">
+<style>
+    .sidebar{
+        height: 160vh;
+    }
+    input[type="search"] {
+        background-color: #898ea1;
+        border: 1px solid white;
+        border-radius: 5px;
+    }
+    label{
+        font-size: 15px;
+        margin: 5px;
+    }
+    input[type="search"]:valid{
+        color: var(--blue);
+    }
+    input:is(:focus, :valid){
+        box-shadow: 0 3px 6px var(--blue);
+    }
+</style>
+<!-- report table -->
+<div class="search">
+    <h1>Employee Data</h1>
+</div>
+
+<table id="employee-table" class="display">
+    <thead>
+        <tr>
+            <th>Employee ID</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th style="display: flex;">E-mail</th>
+            <th>Department</th>
+            <th style="display: flex;">Sign in Time</th>
+            <th>Sign out Time</th>
+            <th style="display: flex;">Image</th>
+        </tr>
+    </thead>
+</table>
+<div class="button" style="
+display: flex;
+justify-content: space-evenly;">
+    <form action="{{ url_for('download_attendance') }}" method="get">
+        <button type="submit" style="
+        padding: 20px;
+        cursor: pointer;
+        background-color: var(--blue);
+        color: white;
+        border-radius: 5px;
+        box-shadow: var(--box-shadow);
+        font-size: 13.5px;
+        ">Export Signin Excel</button>
+    </form>
+
+    <form action="{{ url_for('download_signout') }}" method="get">
+        <button type="submit" style="
+        padding: 20px;
+        cursor: pointer;
+        background-color: var(--blue);
+        color: white;
+        border-radius: 5px;
+        box-shadow: var(--box-shadow);
+        font-size: 13.5px;">Export Signout Excel</button>
+    </form>
+</div>
+<script src="http://code.jquery.com/jquery-1.9.0rc1.js"></script>
+<script src="../static/js/bootstrap.min.js"></script>
+<script src="https://cdn.datatables.net/v/dt/dt-1.13.5/datatables.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $('#employee-table').DataTable({
+            ajax: {
+                url: "{{ url_for('get_employees_data_route') }}",
+                dataSrc: 'data',
+                error: function(xhr, textStatus, errorThrown) {
+                    console.log("Ajax error:", errorThrown);
+                }
+            },
+            columns: [
+            { data: 'EmployeeID' },
+            { data: 'firstName' },
+            { data: 'lastName' },
+            { data: 'email' },
+            { data: 'department' },
+            { data: 'signintime' },
+            { data: 'signouttime' },
+            { 
+                    data: 'image',
+                    render: function(data, type, row) {
+                        return '<img src="data:image/jpeg;base64,' + data + '" alt="Employee Image" width="100">';
+                    }   
+                }
+                ]
+            });
+    });
+</script>
+{% endblock %}

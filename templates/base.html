@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ title }}</title>
+    <!-- links -->
+    <link rel="stylesheet" href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js" integrity="sha512-AA1Bzp5Q0K1KanKKmvN/4d3IRKVlv9PYgwFPvm32nPO6QS8yH1HO7LbgB1pgiOxPtfeg5zEn2ba64MUcqJx6CA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <!-- styles -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/base.css')}}">
+    {% if custom_css%}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/' + custom_css + '.css')}}">
+    {% endif %}
+    <!-- static styles -->
+    <link rel="stylesheet" href="../static/css/base.css">
+</head>
+<body>
+    <!-- start of Navbar -->
+    <div class="sidebar">
+        <div class="top">
+            <div class="logo">
+            </div>
+            <i class="bx bx-menu" id="btn" style="font-size: 35px;"></i>
+        </div>
+        <div class="user">
+            <img src="../static/images/user-img.png" alt="user" class="user-img">
+            <div class="text">
+                <p class="bold">{{username}}</p>
+            </div>
+        </div>
+        <ul>
+            <li>
+                <a href="/base">
+                    <i class="fa fa-home"></i>
+                    <span class="nav-item">Home</span>
+                </a>
+                <span class="tooltip">Home</span>
+            </li>
+            <li>
+                <a href="/signinpage">
+                    <i class="fa fa-sign-in"></i>
+                    <span class="nav-item">Signin</span>
+                </a>
+                <span class="tooltip">Signin</span>
+            </li>
+            <li>
+                <a href="/signoutpage">
+                    <i class="fa fa-video-camera"></i>
+                    <span class="nav-item">Signout</span>
+                </a>
+                <span class="tooltip">Signout</span>
+            </li>
+            {% if role == "Admin" %}
+            <li>
+                <a href="/addUser">
+                    <i class="fa fa-user-plus"></i>
+                    <span class="nav-item">AddUser</span>
+                </a>
+                <span class="tooltip">AddUser</span>
+            </li>
+            <li>
+                <a href="/reports">
+                    <i class="fa fa-book"></i>
+                    <span class="nav-item">EmployeeData</span>
+                </a>
+                <span class="tooltip">EmployeeData</span>
+            </li>
+            <li>
+                <a href="/yearReport">
+                    <i class="fa fa-book"></i>
+                    <span class="nav-item">Reports</span>
+                </a>
+                <span class="tooltip">Reports</span>
+            </li>
+            {% endif %}
+            <li>
+                <a href="/">
+                    <i class="fa fa-sign-out"></i>
+                    <span class="nav-item">Logout</span>
+                </a>
+                 <span class="tooltip">Logout</span>
+            </li>
+        </ul>
+    </div>
+    <!-- end of Navbar -->
+    <!-- Adding a new section -->
+    <div class="main-content">
+        <div class="container">
+            {% block content %}
+            {% endblock %}
+        </div>
+    </div>
+    <!-- ending of the new section -->
+    <!-- start of script -->
+    <script>
+        let btn = document.querySelector('#btn');
+        let sidebar = document.querySelector('.sidebar');
+
+        btn.onclick = function () {
+            sidebar.classList.toggle('active');
+        };
+    </script>
+    <!-- end of script -->
+</body>
+</html>

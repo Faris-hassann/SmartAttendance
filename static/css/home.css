@@ -1,0 +1,93 @@
+.line{
+    width: 5%;
+    border-bottom: 3px solid black;
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
+.base{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #d6d6d6ee;
+}
+.base .text{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.base .text > h2{
+    font-size: 20px;
+    color: var(--blue);
+    font-weight: 600;
+}
+.base .text h2 > span{
+    font-size: 30px;
+    color: var(--blue);
+    font-weight: 600;
+    padding: 2px
+}
+.base .text .image{
+    width: 300px;
+}
+.base .text img{
+    max-width: 100px;
+}
+.display{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+.display .box > h3{
+    /* font-weight: 300; */
+    margin: 10px;
+    font-size: 15px;
+}
+.choice{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+.choice .containerrrr{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    border: 1px solid #333;
+    border-radius: 3px;
+    box-shadow: 0 10px 8px var(--blue);
+}
+.choice .containerrrr > a{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 400px;
+    height: 200px;
+    color: white;
+    background-color: var(--blue);
+    font-size: 20px;
+}
+.choice .containerrrr a > i{
+    font-size: 50px;
+}
+.choice .containerrrr > a:hover{
+    background-color: white;
+    color: var(--blue);
+}
+.graph{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 30px;
+}
+.graph img{
+    max-width: 800px;
+}
+@media (max-width: 776px) {
+    .graph img{
+        max-width: 350px;
+    }
+}
